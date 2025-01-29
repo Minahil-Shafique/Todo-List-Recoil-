@@ -33,7 +33,7 @@ A Todo List application built using **React** and **Recoil** for state managemen
 
 3. Start the development server:
    ```bash
-   npm run dev
+   npm start
    ```
 
 
