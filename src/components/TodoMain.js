@@ -1,25 +1,30 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { todoListAtom } from "../recoil/atoms/todoAtom";
+import { filteredTodoListSelector } from "../recoil/selectors/filteredTodoListSelector";
 import TodoItemCreator from "./TodoItemCreator";
 import TodoItem from "./TodoItem";
+import FilterDropdown from "./FilterDropDown";
+
 const TodoMain = () => {
-  const todoList = useRecoilValue(todoListAtom);
+  const filteredTodoList = useRecoilValue(filteredTodoListSelector);
 
   return (
     <div className="parent-container">
       <div>
         <TodoItemCreator />
-        {
-          todoList.length > 0 && (
-            <div style={{color: "white"}} className="todos-list">
-              {todoList.map((todoItem) => (
-                <TodoItem key={todoItem.id} item={todoItem} />
-              ))}
-            </div>
-          )
-        }
-        </div>
+        <FilterDropdown />
+        {filteredTodoList.length > 0 ? (
+          <div style={{ color: "white" }} className="todos-list">
+            {filteredTodoList.map((filterItem) => (
+              <TodoItem key={filterItem.id} item={filterItem} />
+            ))}
+          </div>
+        ) : (
+          <div style={{ color: "white" }} className="todos-list">
+            No tasks match the current filter...
+          </div>
+        )}
+      </div>
     </div>
   );
 };

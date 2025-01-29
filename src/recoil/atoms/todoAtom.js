@@ -1,6 +1,10 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const {persistAtom} = recoilPersist();
 
 export const todoListAtom = atom({
+
   key: "todoListState", // Unique key for this atom
   default: [
     {
@@ -8,5 +12,6 @@ export const todoListAtom = atom({
       id: 1233,
       isCompleted: false,
     },
-  ], // Initial state as an array of todo items
+  ], 
+  effects_UNSTABLE: [persistAtom]
 });
